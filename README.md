@@ -121,7 +121,7 @@ The output of the repeatvector is sent to two sequential bi-direcitonal lstm lay
 
 The final output layer is a shared time distributed dense layer. It consists of nine output layers which corresponds to the nine quantiles of interest (q = 1, 5, 10, 25, 50, 75, 90, 95 and 99%). It is extremely important to note that the outputs have their own quantile loss function and that these quantiles are all processed in the same network, instead of creating one network for each quantile. This makes sure that each quantile is based on the exact same network with the same parameters. If we created a separate network for each quantile, the different quantile curves could cross each other since they are all based on different parameters.
 
-This quantile loss for a given prediction _y<sub>i<sup>p</sup></sub>_ and outcome _y<sub>i</sub>_ for quantile _q_ is given by the following equation: 
+This quantile loss for a given prediction _y<sub>i</sub><sup>p</sup>_ and outcome _y<sub>i</sub>_ for quantile _q_ is given by the following equation: 
 
 <p align="center">
 <img src="images/image11.png" width="300" align="center" />
