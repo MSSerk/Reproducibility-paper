@@ -12,9 +12,8 @@ In the current electricity price forecasting market, complex dependencies exist 
 
 In this blog we will take you through our process and results of attempting to reproduce this paper. The main goal of this reproducibility project was to reproduce figure 6d of the paper, which contains the day-ahead electricity prices for seven consecutive days and can be seen in the figure below.
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-![alt_text](images/image1.png "image_tooltip")
+![alt_text](images/image1.png =250x)
 
 
 The authors of this paper use the quantile loss function to predict the quantiles of the day-ahead electricity prices. In order to reproduce these results, we have created our own python codes from scratch since there were no codes provided along with the paper. We implemented the code in two Jupyter Notebook files which can be found in our Github repository along with other important files: [https://github.com/MSSerk/Reproducibility-paper.git](https://github.com/MSSerk/Reproducibility-paper.git)
@@ -40,13 +39,13 @@ Since we are using data from two different sources, it might be possible that th
 After merging all the data together into a single 2D numpy array, the output of the array gets the following structure:  
 
 
-![alt_text](images/image2.png "image_tooltip")
+![alt_text](images/image2.png )
 
 
 The next step is to take a random sample from the generated data in order to inspect if the merging of the arrays has been performed successfully. This can be seen in the following lines of code: 
 
 
-![alt_text](images/image3.png "image_tooltip")
+![alt_text](images/image3.png )
 
 
 The printed values are compared to the original values in the CSV files to perform a double check on the data, as a misalignment of the weather and generation data can have a significant effect on the model’s performance. 
@@ -65,13 +64,13 @@ The input data (per sample), also known as the input horizon, contains the past 
 An example of the first sample of the input and output data is given in the figure below. The blue dots are the inputs, while the red dots are the outputs. At the bottom of this figure, the definitions of the different horizons are shown.
 
 
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](images/image4.png )
 
 
 The next sample is then shifted 24 hours to the right and added to the numpy array. This can be seen in the following figure where the second sample is shifted 24 hours to the right:
 
 
-![alt_text](images/image5.png "image_tooltip")
+![alt_text](images/image5.png )
 
 
 Note that the figures above contain only the electricity prices as input feature, and that the other input features have not been plotted, in order to keep a clear plot.
@@ -79,13 +78,13 @@ Note that the figures above contain only the electricity prices as input feature
 Since we take timesteps of 24 hours between each sample while having a horizon of 36 hours, it means that each sample uses the last 12 hours from the previous sample. This complicates reshaping the data as certain data will be repeated. This is eventually done by creating each sample separately from the complete dataset and then stacking them on top of each other. This is shown in the figure below, where two consecutive samples of the input data is shown as an example. The last 12 rows of sample n is reused as the first 12 rows of sample n+1. These samples will then be stacked on top of each other.
 
 
-![alt_text](images/image6.png "image_tooltip")
+![alt_text](images/image6.png )
 
 
 After seperating the train and test data, and reordering all the data, we get the following input and output shapes for the train and test set:
 
 
-![alt_text](images/image7.png "image_tooltip")
+![alt_text](images/image7.png )
 
 
 ## Network
@@ -94,7 +93,7 @@ Now that the train and test data has been generated, the next step that we perfo
 
 An LSTM network is a neural architecture which allows the information that it gets fed into to be propagated through time among consecutive steps within the internal state of the network [2]. The single cell LSTM memory block, which is given in the left figure below, contains three gates, known as the input, output and the forget gate. The main principle of these gates is that they allow for the writing, reading and resetting of the information that it is fed to. 
 
-![alt_text](images/image8.png "image_tooltip")
+![alt_text](images/image8.png )
 
 LSTMs have been proven to show promising results as they have also been used in other time series forecastings, e.g. predicting stock prices for quantitative trading [3]. The unidirectional LSTM only uses information of the past as these are the only inputs that are being fed into the memory block.
 
@@ -103,7 +102,7 @@ This is where bi-directional LSTM separates itself from the unidirectional one. 
 In our reproduction, we made use of a three layered bi-directional LSTM network, which can be seen in the figure below. This is also what has been suggested by the authors of the paper, as these number of layers produced the best predicting model for the day-ahead electricity prices.
 
 
-![alt_text](images/image10.png "image_tooltip")
+![alt_text](images/image10.png )
 
 
 The first layer consists of the input layer which has 36 neurons, one for each hour. Each of these input neurons receives 7 input features, which have been defined earlier. 
@@ -118,25 +117,25 @@ The final output layer is a shared time distributed dense layer. It consists of 
 
 This quantile loss for a given prediction _y<sub>i<sup>p</sup></sub>_ and outcome _y<sub>i</sub>_ for quantile _q_ is given by the following equation: 
 
-![alt_text](images/image11.png "image_tooltip")
+![alt_text](images/image11.png )
 
 The full list of hyperparameters used can be found in the table below: 
 
 
-![alt_text](images/image12.png "image_tooltip")
+![alt_text](images/image12.png )
 
 
 ## Results
 
 Using the trained network to predict the quantiles of our test set gives the following plot.
 
-![alt_text](images/image13.png "image_tooltip")
+![alt_text](images/image13.png )
 
 
 In this case, we predict the quantiles for the period from the 13th up until and including the 19th of February 2021. We obtain an RMSE error of €9.42 between the predicted value, which is the output of quantile 50 given in blue, and the actual value given in red. The quantile mean loss was €21.16. We can also observe that a large part of the actual values fall between the quantiles 25 and 75. The different losses are also shown in the figure below.
 
 
-![alt_text](images/image14.png "image_tooltip")
+![alt_text](images/image14.png )
 
 
 These results differ for the different test set periods, but this period gave one of the best results on our trained model. The specific model we trained is also given in our Github repository and there is a cell in the Jupyter Notebook file which can load this model in. Please note that you need to uncomment this line of code and that you also need to run the first 3 cells of the same file.
