@@ -12,9 +12,9 @@ In the current electricity price forecasting market, complex dependencies exist 
 
 In this blog we will take you through our process and results of attempting to reproduce this paper. The main goal of this reproducibility project was to reproduce figure 6d of the paper, which contains the day-ahead electricity prices for seven consecutive days and can be seen in the figure below.
 
-
+<p align="center">
 <img src="images/image1.png" width="600" align="center" />
-
+</p>
 
 The authors of this paper use the quantile loss function to predict the quantiles of the day-ahead electricity prices. In order to reproduce these results, we have created our own python codes from scratch since there were no codes provided along with the paper. We implemented the code in two Jupyter Notebook files which can be found in our Github repository along with other important files: [https://github.com/MSSerk/Reproducibility-paper.git](https://github.com/MSSerk/Reproducibility-paper.git)
 
