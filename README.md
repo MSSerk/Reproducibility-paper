@@ -44,7 +44,9 @@ Conversion notes:
 # Predicting Day-Ahead Electricity Prices
 
 Hüseyin Harmankaya (4674057, [H.Harmankaya@student.tudelft.nl](mailto:H.Harmankaya@student.tudelft.nl))
+
 Serkan Simsek (4566327, [M.S.Simsek@student.tudelft.nl](mailto:M.S.Simsek@student.tudelft.nl))
+
 Github repository: [https://github.com/MSSerk/Reproducibility-paper.git](https://github.com/MSSerk/Reproducibility-paper.git)
 
 ## Introduction
