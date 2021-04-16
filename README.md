@@ -12,6 +12,7 @@ In the current electricity price forecasting market, complex dependencies exist 
 
 In this blog we will take you through our process and results of attempting to reproduce this paper. The main goal of this reproducibility project was to reproduce figure 6d of the paper, which contains the day-ahead electricity prices for seven consecutive days and can be seen in the figure below.
 
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image1.png "image_tooltip")
 
