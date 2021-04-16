@@ -1,46 +1,3 @@
-<!-- Output copied to clipboard! -->
-
-<!-----
-NEW: Check the "Suppress top comment" option to remove this info from the output.
-
-Conversion time: 8.61 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β29
-* Fri Apr 16 2021 10:14:29 GMT-0700 (PDT)
-* Source doc: Blog
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
-
------>
-
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 0; ALERTS: 11.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-<a href="#gdcalert7">alert7</a>
-<a href="#gdcalert8">alert8</a>
-<a href="#gdcalert9">alert9</a>
-<a href="#gdcalert10">alert10</a>
-<a href="#gdcalert11">alert11</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
 # Predicting Day-Ahead Electricity Prices
 
 Hüseyin Harmankaya (4674057, [H.Harmankaya@student.tudelft.nl](mailto:H.Harmankaya@student.tudelft.nl))
@@ -59,7 +16,7 @@ In this blog we will take you through our process and results of attempting to r
 ![alt_text](images/image1.png "image_tooltip")
 
 
-The authors of this paper use the quantile loss function to predict the quantiles of the day-ahead electricity prices. In order to reproduce these results, we have created our own python codes from scratch since there were no codes provided along with the paper. We implemented the code in two Jupyter Notebook files which can be found in our Github repository along with other important files: [https://github.com/MSSerk/Reproducibility-paper.git](https://github.com/MSSerk/Reproducibility-paper.git)** **
+The authors of this paper use the quantile loss function to predict the quantiles of the day-ahead electricity prices. In order to reproduce these results, we have created our own python codes from scratch since there were no codes provided along with the paper. We implemented the code in two Jupyter Notebook files which can be found in our Github repository along with other important files: [https://github.com/MSSerk/Reproducibility-paper.git](https://github.com/MSSerk/Reproducibility-paper.git)
 
 The Jupyter Notebook files contain among others, the bi-LSTM model (created in tensorflow), the chosen hyperparameters, and many more useful data. We started the reproduction by first choosing and collecting our data. 
 
@@ -82,18 +39,10 @@ Since we are using data from two different sources, it might be possible that th
 After merging all the data together into a single 2D numpy array, the output of the array gets the following structure:  
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image2.png "image_tooltip")
 
 
 The next step is to take a random sample from the generated data in order to inspect if the merging of the arrays has been performed successfully. This can be seen in the following lines of code: 
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![alt_text](images/image3.png "image_tooltip")
@@ -115,18 +64,10 @@ The input data (per sample), also known as the input horizon, contains the past 
 An example of the first sample of the input and output data is given in the figure below. The blue dots are the inputs, while the red dots are the outputs. At the bottom of this figure, the definitions of the different horizons are shown.
 
 
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image4.png "image_tooltip")
 
 
 The next sample is then shifted 24 hours to the right and added to the numpy array. This can be seen in the following figure where the second sample is shifted 24 hours to the right:
-
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![alt_text](images/image5.png "image_tooltip")
@@ -137,18 +78,10 @@ Note that the figures above contain only the electricity prices as input feature
 Since we take timesteps of 24 hours between each sample while having a horizon of 36 hours, it means that each sample uses the last 12 hours from the previous sample. This complicates reshaping the data as certain data will be repeated. This is eventually done by creating each sample separately from the complete dataset and then stacking them on top of each other. This is shown in the figure below, where two consecutive samples of the input data is shown as an example. The last 12 rows of sample n is reused as the first 12 rows of sample n+1. These samples will then be stacked on top of each other.
 
 
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image6.png "image_tooltip")
 
 
 After seperating the train and test data, and reordering all the data, we get the following input and output shapes for the train and test set:
-
-
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![alt_text](images/image7.png "image_tooltip")
@@ -160,6 +93,8 @@ Now that the train and test data has been generated, the next step that we perfo
 
 An LSTM network is a neural architecture which allows the information that it gets fed into to be propagated through time among consecutive steps within the internal state of the network [2]. The single cell LSTM memory block, which is given in the left figure below, contains three gates, known as the input, output and the forget gate. The main principle of these gates is that they allow for the writing, reading and resetting of the information that it is fed to. 
 
+![alt_text](images/image8.png "image_tooltip")
+
 LSTMs have been proven to show promising results as they have also been used in other time series forecastings, e.g. predicting stock prices for quantitative trading [3]. The unidirectional LSTM only uses information of the past as these are the only inputs that are being fed into the memory block.
 
 This is where bi-directional LSTM separates itself from the unidirectional one. Bi-directional LSTMs are an extension of the unidirectional LSTMs where the network works in two directions, one from the future and one from the past. An example of such a bi-directional network is given in the right figure above.
@@ -167,11 +102,7 @@ This is where bi-directional LSTM separates itself from the unidirectional one. 
 In our reproduction, we made use of a three layered bi-directional LSTM network, which can be seen in the figure below. This is also what has been suggested by the authors of the paper, as these number of layers produced the best predicting model for the day-ahead electricity prices.
 
 
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image8.png "image_tooltip")
+![alt_text](images/image10.png "image_tooltip")
 
 
 The first layer consists of the input layer which has 36 neurons, one for each hour. Each of these input neurons receives 7 input features, which have been defined earlier. 
@@ -186,36 +117,25 @@ The final output layer is a shared time distributed dense layer. It consists of 
 
 This quantile loss for a given prediction _y<sub>i<sup>p</sup></sub>_ and outcome _y<sub>i</sub>_ for quantile _q_ is given by the following equation: 
 
+![alt_text](images/image11.png "image_tooltip")
+
 The full list of hyperparameters used can be found in the table below: 
 
 
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image9.png "image_tooltip")
+![alt_text](images/image12.png "image_tooltip")
 
 
 ## Results
 
 Using the trained network to predict the quantiles of our test set gives the following plot.
 
-
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image10.png "image_tooltip")
+![alt_text](images/image13.png "image_tooltip")
 
 
 In this case, we predict the quantiles for the period from the 13th up until and including the 19th of February 2021. We obtain an RMSE error of €9.42 between the predicted value, which is the output of quantile 50 given in blue, and the actual value given in red. The quantile mean loss was €21.16. We can also observe that a large part of the actual values fall between the quantiles 25 and 75. The different losses are also shown in the figure below.
 
 
-
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image11.png "image_tooltip")
+![alt_text](images/image14.png "image_tooltip")
 
 
 These results differ for the different test set periods, but this period gave one of the best results on our trained model. The specific model we trained is also given in our Github repository and there is a cell in the Jupyter Notebook file which can load this model in. Please note that you need to uncomment this line of code and that you also need to run the first 3 cells of the same file.
