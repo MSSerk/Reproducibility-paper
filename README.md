@@ -78,13 +78,17 @@ Note that the figures above contain only the electricity prices as input feature
 Since we take timesteps of 24 hours between each sample while having a horizon of 36 hours, it means that each sample uses the last 12 hours from the previous sample. This complicates reshaping the data as certain data will be repeated. This is eventually done by creating each sample separately from the complete dataset and then stacking them on top of each other. This is shown in the figure below, where two consecutive samples of the input data is shown as an example. The last 12 rows of sample n is reused as the first 12 rows of sample n+1. These samples will then be stacked on top of each other.
 
 
-![alt_text](images/image6.png )
+<p align="center">
+<img src="images/image6.png" width="400" align="center" />
+</p>
 
 
 After seperating the train and test data, and reordering all the data, we get the following input and output shapes for the train and test set:
 
 
-![alt_text](images/image7.png )
+<p align="center">
+<img src="images/image7.png" width="400" align="center" />
+</p>
 
 
 ## Network
@@ -102,7 +106,9 @@ This is where bi-directional LSTM separates itself from the unidirectional one. 
 In our reproduction, we made use of a three layered bi-directional LSTM network, which can be seen in the figure below. This is also what has been suggested by the authors of the paper, as these number of layers produced the best predicting model for the day-ahead electricity prices.
 
 
-![alt_text](images/image10.png )
+<p align="center">
+<img src="images/image10.png" width="600" align="center" />
+</p>
 
 
 The first layer consists of the input layer which has 36 neurons, one for each hour. Each of these input neurons receives 7 input features, which have been defined earlier. 
@@ -117,12 +123,16 @@ The final output layer is a shared time distributed dense layer. It consists of 
 
 This quantile loss for a given prediction _y<sub>i<sup>p</sup></sub>_ and outcome _y<sub>i</sub>_ for quantile _q_ is given by the following equation: 
 
-![alt_text](images/image11.png )
+<p align="center">
+<img src="images/image11.png" width="300" align="center" />
+</p>
 
 The full list of hyperparameters used can be found in the table below: 
 
 
-![alt_text](images/image12.png )
+<p align="center">
+<img src="images/image12.png" width="400" align="center" />
+</p>
 
 
 ## Results
@@ -135,7 +145,9 @@ Using the trained network to predict the quantiles of our test set gives the fol
 In this case, we predict the quantiles for the period from the 13th up until and including the 19th of February 2021. We obtain an RMSE error of €9.42 between the predicted value, which is the output of quantile 50 given in blue, and the actual value given in red. The quantile mean loss was €21.16. We can also observe that a large part of the actual values fall between the quantiles 25 and 75. The different losses are also shown in the figure below.
 
 
-![alt_text](images/image14.png )
+<p align="center">
+<img src="images/image14.png" width="400" align="center" />
+</p>
 
 
 These results differ for the different test set periods, but this period gave one of the best results on our trained model. The specific model we trained is also given in our Github repository and there is a cell in the Jupyter Notebook file which can load this model in. Please note that you need to uncomment this line of code and that you also need to run the first 3 cells of the same file.
